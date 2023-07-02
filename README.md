@@ -271,7 +271,7 @@ Optionally remove them from `config/additional_ca/` directory.
 
 1. Delete _Additional CA_ from custom components
 
-`rm config/custom_components/additional_ca`
+`rm -r config/custom_components/additional_ca`
 
 2. Remove `additional_ca:` config tree from `configuration.yaml`
 
@@ -286,7 +286,11 @@ default_config:
 
 3. Optionally remove additional_ca folder containing your custom CA
 
-`rm config/additional_ca`
+`rm -r config/additional_ca`
+
+4. Recreate container
+
+`docker compose up -d --force-recreate`
 
 
 ## 8. TROUBLESHOOTING
