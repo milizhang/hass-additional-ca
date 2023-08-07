@@ -3,3 +3,4 @@ colorlog
 isort[colors]
 black
 pylint
+certifi

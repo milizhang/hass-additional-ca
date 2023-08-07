@@ -17,6 +17,7 @@ from .utils import (
     remove_additional_ca,
     remove_all_additional_ca,
     update_system_ca,
+    append_ca_to_certifi,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -87,6 +88,7 @@ async def update_ca_certificates(hass: HomeAssistant, config: ConfigType, store:
             continue
 
         if os.path.isfile(additional_ca_fullpath):
+            append_ca_to_certifi(additional_ca_fullpath)
             ca_uname = copy_ca_to_system(additional_ca_fullpath)
             try:
                 update_system_ca()

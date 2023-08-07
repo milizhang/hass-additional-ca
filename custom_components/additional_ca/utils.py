@@ -6,6 +6,7 @@ import random
 import shutil
 import string
 import subprocess
+import certifi
 
 from .const import CA_SYSPATH, UPDATE_CA_SYSCMD
 
@@ -34,6 +35,15 @@ def remove_all_additional_ca(additional_ca_store: dict) -> bool:
                     return False
     return True
 
+def append_ca_to_certifi(ca_src_fullpath: str):
+    ca_file = os.path.basename(ca_src_fullpath)
+    certifi_bundle_file = certifi.where()
+    certifi_bundle = open(certifi_bundle_file, "a")
+    ca_file = open(ca_src_fullpath, "r")
+    certifi_bundle.write("\n")
+    certifi_bundle.write(ca_file.read())
+    ca_file.close()
+    certifi_bundle.close()
 
 def copy_ca_to_system(ca_src_fullpath: str) -> str:
     ca_file = os.path.basename(ca_src_fullpath)
